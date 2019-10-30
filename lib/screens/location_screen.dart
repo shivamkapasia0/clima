@@ -141,7 +141,7 @@ weatherMessage = weather.getMessage(temprature);
     child: ListView.builder(
     itemCount: 10,
     scrollDirection: Axis.horizontal,
-    itemBuilder: (context, index) => Card(
+    itemBuilder: (context, index) => Card(color: Colors.deepOrangeAccent,
     child: Padding(
     padding: const EdgeInsets.all(8.0),
     child: Column(
