@@ -12,6 +12,8 @@ class LocationScreen extends StatefulWidget {
 class _LocationScreenState extends State<LocationScreen> {
   WeatherModel weather = WeatherModel();
 String weatherMessage;
+int humidity;
+double windSpeed;
   String weatherIcon;
   int temprature;
   String cityName;
@@ -38,22 +40,24 @@ if(weatherData == null){
     var condition = weatherData['weather'][0]
 ['id'];
     weatherIcon =weather.getWeatherIcon(condition);
+humidity = weatherData['main']['humidity'];
+windSpeed = weatherData['wind']['speed'];
     weatherDescription = weatherData['weather'][0]['description'];
 weatherMessage = weather.getMessage(temprature);
     });
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Theme.of(context).primaryColor,
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/location_background.jpg'),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-                Colors.white.withOpacity(0.8), BlendMode.dstATop),
-          ),
-        ),
+//        decoration: BoxDecoration(
+//          image: DecorationImage(
+//            image: AssetImage('images/location_background.jpg'),
+//            fit: BoxFit.cover,
+//            colorFilter: ColorFilter.mode(
+//                Colors.white.withOpacity(0.8), BlendMode.dstATop),
+//          ),
+//        ),
         constraints: BoxConstraints.expand(),
         child: SafeArea(
           child: Column(
@@ -91,28 +95,70 @@ weatherMessage = weather.getMessage(temprature);
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15.0),
-                child: Row(
+                padding: EdgeInsets.all( 8.0),
+                child: Column(
                   children: <Widget>[
                     Text(
-                      '$temprature°C',
+                      '$temprature°',
                       style: kTempTextStyle,
                     ),
                     Text(
                       weatherIcon,
                       style: kConditionTextStyle,
                     ),
+                    Text(
+                      '$weatherDescription',
+                      style: kConditionTextStyle2,
+                    ),
+                    Text(
+                      'Humidity : $humidity',
+                      style: kConditionTextStyle2,
+                    ),
+                    Text(
+                      'WindSpeed : $windSpeed',
+                      style: kConditionTextStyle2,
+                    ),
+                    Text(
+                      '$cityName',
+                      style: kConditionTextStyle,
+                    ),
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(right: 15.0),
-                child: Text(
-                  "$weatherMessage in $cityName!",
-                  textAlign: TextAlign.right,
-                  style: kMessageTextStyle,
-                ),
-              ),
+//              Padding(
+//                padding: EdgeInsets.only(right: 15.0),
+//                child: Text(
+//                  "$weatherMessage in $cityName!",
+//                  textAlign: TextAlign.right,
+//                  style: kMessageTextStyle,
+//                ),
+//              ),
+    SafeArea(
+    child: Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+    height: 200.0,
+    child: ListView.builder(
+    itemCount: 10,
+    scrollDirection: Axis.horizontal,
+    itemBuilder: (context, index) => Card(
+    child: Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+    Text('$cityName',),
+    Text('$weatherDescription', ),
+    Text('$temprature',  ),
+    Image.network('https://openweathermap.org/img/w/01d.png'),
+    Text('Jun 28, 2018', ),
+    Text('18:30', ),
+    ],
+    ),
+    ),
+    )
+    ),
+    ),),)
             ],
           ),
         ),

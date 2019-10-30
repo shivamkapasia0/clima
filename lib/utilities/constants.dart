@@ -16,7 +16,10 @@ const kButtonTextStyle = TextStyle(
 );
 
 const kConditionTextStyle = TextStyle(
-  fontSize: 100.0,
+  fontSize: 50.0,
+);
+const kConditionTextStyle2 = TextStyle(
+  fontSize: 20.0,
 );
 const KTextFielInputDecoration =InputDecoration(
     filled: true,

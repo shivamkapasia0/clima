@@ -26,7 +26,7 @@ class WeatherModel {
 
   String getWeatherIcon(int condition) {
     if (condition < 300) {
-      return '🌩';
+      return '☁';
     } else if (condition < 400) {
       return '🌧';
     } else if (condition < 600) {
@@ -40,7 +40,7 @@ class WeatherModel {
     } else if (condition <= 804) {
       return '☁️';
     } else {
-      return '🤷‍';
+      return '🤷';
     }
   }
 
